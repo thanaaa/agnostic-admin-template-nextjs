@@ -1,10 +1,9 @@
-import { createClient } from '@vercel/postgres';
+import { Client } from 'pg';
 import { Card, Title, Text } from '@tremor/react';
 import Search from './search';
 import UsersTable from './table';
 import dotenv from 'dotenv';
 
-// Load environment variables
 dotenv.config();
 
 interface User {
@@ -19,9 +18,10 @@ export default async function IndexPage({
 }: {
   searchParams: { q: string };
 }) {
-  const client = createClient(
+  const connectionString = process.env.POSTGRES_URL_NON_POOLING;
 
-  );
+  const client = new Client({ connectionString });
+  await client.connect();
   const search = searchParams.q ?? '';
 
   try {
@@ -51,5 +51,7 @@ export default async function IndexPage({
         <Text>Failed to retrieve users from the database.</Text>
       </main>
     );
+  } finally {
+    await client.end();
   }
 }
