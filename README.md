@@ -16,7 +16,7 @@
 
 ## Overview
 
-This is A BIG CHANGE starter template using the following sta NOPE ck:
+This is A  template using the  sta NOPE ck:
 
 - Framework - [Next.js 13](https://nextjs.org/13)
 - Language - [TypeScript](https://www.typescriptlang.org)
